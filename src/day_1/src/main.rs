@@ -16,17 +16,15 @@ static DATA: &str = r#"
 "#;
 
 fn main() {
-    //let mut elfs: Vec<i32> = vec![];
-
-
-    //let workspace_root =     
+    // Get data
     let mut data_path: String = std::env::current_dir().unwrap().to_str().unwrap().to_owned();
     data_path.push_str("/data/day_1/data1");
     let file: String = String::from_utf8(std::fs::read(data_path).unwrap()).unwrap();
 
-    let mut data = normalize_data(&file);
+    // Mut to enable sorting
+    let mut data = parse_data_to_vec(&file);
 
-    let max = find_max(&mut data);
+    let max = find_highest(&mut data);
     
     let (first, second, third) = find_top_three(&mut data);
 
@@ -35,8 +33,8 @@ fn main() {
     println!("{}", first + second + third);
 }
 
-
-fn normalize_data(input: &str) -> Vec<i32> {
+fn parse_data_to_vec(input: &str) -> Vec<i32> {
+    // Some split magic
     let elf_entry: Vec<&str> = input.split("\n\n").into_iter().collect();
 
     elf_entry 
@@ -49,7 +47,7 @@ fn normalize_data(input: &str) -> Vec<i32> {
         .collect::<Vec<i32>>()
 }
 
-fn find_max(input: &mut Vec<i32>) -> i32 {
+fn find_highest(input: &mut Vec<i32>) -> i32 {
     input.sort();
 
     input[input.len() - 1]
@@ -57,6 +55,7 @@ fn find_max(input: &mut Vec<i32>) -> i32 {
 
 
 fn find_top_three(input: &mut Vec<i32>) -> (i32, i32, i32) {
+    // YES I KNOW WE'LL SORT TWO TIME. JUST IN CASE
     input.sort();
     
     let length = input.len();
