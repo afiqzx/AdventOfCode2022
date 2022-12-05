@@ -1,4 +1,5 @@
 [workspace]
 members = [
     "src/day_1",
+    "src/day_2",
 ]
