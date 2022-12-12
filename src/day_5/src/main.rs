@@ -22,12 +22,21 @@ fn main() {
     let file: String = String::from_utf8(std::fs::read(data_path).unwrap()).unwrap();
     //let file: String = DATA.to_string();
 
-    let board = data_stack::StackBoard::from_str(&file);
+    let mut board1 = data_stack::StackBoard::from_str(&file);
+    let mut board2 = board1.clone();
+    board1.start_move_one();
+    board2.start_move_stack();
 
-    println!("{board:?}");
+    //println!("{board:?}");
 
     // round 1
+    println!("--------------------------------------");
+    board1.print_top();
+    println!("--------------------------------------");
 
     // round 2
+    println!("--------------------------------------");
+    board2.print_top();
+    println!("--------------------------------------");
 }
 
